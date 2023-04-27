@@ -25,11 +25,11 @@ phases:
     commands:
       # Starts web server for E2E tests - replace with your own server invocation
       # https://docs.cypress.io/guides/continuous-integration/introduction#Boot-your-server
-      - npm start &
-      - npx wait-on 'http-get://localhost:3000' # Waits for above
+      # - npm start &
+      # - npx wait-on 'http-get://localhost:3000' # Waits for above
       # Records to Cypress Cloud 
       # https://docs.cypress.io/guides/cloud/projects#Set-up-a-project-to-record
       # For recording and parallelization to work you must set your CYPRESS_RECORD_KEY
       # in your AWS Codebuild project → Build details → Environment →
       # Additional configuration → Environment variables
-      - npx cypress run --record --parallel --ci-build-id $CODEBUILD_INITIATOR
+      - npx cypress run --record --key d18e6be6-b228-47d3-a221-5c3a175d1248 --parallel --ci-build-id $CODEBUILD_INITIATOR
