@@ -2,11 +2,11 @@ version: 0.2
 # Runs jobs in parallel
 # https://docs.cypress.io/guides/guides/parallelization
 batch:
-  fast-fail: false
-  build-list:
-    # Uses 2 parallel instances
-    - identifier: build1
-    - identifier: build2
+  # fast-fail: false
+  # build-list:
+  #   # Uses 2 parallel instances
+  #   - identifier: build1
+  #   - identifier: build2
 phases:
   install:
     runtime-versions:
@@ -29,4 +29,4 @@ phases:
       # For recording and parallelization to work you must set your CYPRESS_RECORD_KEY
       # in your AWS Codebuild project → Build details → Environment →
       # Additional configuration → Environment variables
-      - npx cypress run --record --key d18e6be6-b228-47d3-a221-5c3a175d1248 --parallel --ci-build-id $CODEBUILD_INITIATOR
+      - npx cypress run --record --key d18e6be6-b228-47d3-a221-5c3a175d1248
