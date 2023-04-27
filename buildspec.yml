@@ -12,11 +12,12 @@ phases:
     runtime-versions:
       nodejs: latest
     commands:
-      - echo installing yran
-      - npm install --global yarn
-      - echo installing packages...
-      - yarn install
-      - echo installing packages.is done.....
+      - echo installing npm
+      # - npm install --global yarn
+      # - echo installing packages...
+      # - yarn install
+      # - echo installing packages.is done.....
+      - npm install
   build:
     commands:
       # Starts web server for E2E tests - replace with your own server invocation
