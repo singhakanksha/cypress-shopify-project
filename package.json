@@ -4,7 +4,8 @@
   "description": "A project to learn and show web ui automation and integration with cypress dashboard and CI/CD aws codebuild",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "e2e:ci": "npx cypress run --record --key d18e6be6-b228-47d3-a221-5c3a175d1248"
   },
   "author": "Akanksha Singh",
   "license": "ISC",
