@@ -1,0 +1,35 @@
+version: 0.2
+# Runs jobs in parallel
+# https://docs.cypress.io/guides/guides/parallelization
+batch:
+  fast-fail: false
+  build-list:
+    # Uses 2 parallel instances
+    - identifier: build1
+    - identifier: build2
+phases:
+  install:
+    runtime-versions:
+      nodejs: latest
+    commands:
+      # Set COMMIT_INFO variables to send Git specifics to Cypress Cloud when recording
+      # https://docs.cypress.io/guides/continuous-integration/introduction#Git-information
+      - export COMMIT_INFO_BRANCH="$(git rev-parse HEAD | xargs git name-rev | cut -d' ' -f2 | sed 's/remotes/origin///g')"
+      - export COMMIT_INFO_MESSAGE="$(git log -1 --pretty=%B)"
+      - export COMMIT_INFO_EMAIL="$(git log -1 --pretty=%ae)"
+      - export COMMIT_INFO_AUTHOR="$(git log -1 --pretty=%an)"
+      - export COMMIT_INFO_SHA="$(git log -1 --pretty=%H)"
+      - export COMMIT_INFO_REMOTE="$(git config --get remote.origin.url)"
+      - npm ci --prefer-offline
+  build:
+    commands:
+      # Starts web server for E2E tests - replace with your own server invocation
+      # https://docs.cypress.io/guides/continuous-integration/introduction#Boot-your-server
+      - npm start &
+      - npx wait-on 'http-get://localhost:3000' # Waits for above
+      # Records to Cypress Cloud 
+      # https://docs.cypress.io/guides/cloud/projects#Set-up-a-project-to-record
+      # For recording and parallelization to work you must set your CYPRESS_RECORD_KEY
+      # in your AWS Codebuild project → Build details → Environment →
+      # Additional configuration → Environment variables
+      - npx cypress run --record --parallel --ci-build-id $CODEBUILD_INITIATOR

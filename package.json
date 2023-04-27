@@ -1,0 +1,14 @@
+{
+  "name": "cypress-shopify-project",
+  "version": "1.0.0",
+  "description": "A project to learn and show web ui automation and integration with cypress dashboard and CI/CD aws codebuild",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Akanksha Singh",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^12.11.0"
+  }
+}
