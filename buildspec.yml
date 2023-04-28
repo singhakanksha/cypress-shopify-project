@@ -1,33 +1,14 @@
 version: 0.2
-# Runs jobs in parallel
-# https://docs.cypress.io/guides/guides/parallelization
-batch:
-  # fast-fail: false
-  # build-list:
-  #   # Uses 2 parallel instances
-  #   - identifier: build1
-  #   - identifier: build2
+
 phases:
   install:
     runtime-versions:
-      nodejs: latest
+      nodejs: 14
     commands:
-      - echo installing npm
-      # - npm install --global yarn
-      # - echo installing packages...
-      # - yarn install
-      # - echo installing packages.is done.....
       - npm install
+  pre_build:
+    commands:
+      - $(npm bin)/cypress verify
   build:
     commands:
-      # Starts web server for E2E tests - replace with your own server invocation
-      # https://docs.cypress.io/guides/continuous-integration/introduction#Boot-your-server
-      # - npm start &
-      # - npx wait-on 'http-get://localhost:3000' # Waits for above
-      # Records to Cypress Cloud 
-      # https://docs.cypress.io/guides/cloud/projects#Set-up-a-project-to-record
-      # For recording and parallelization to work you must set your CYPRESS_RECORD_KEY
-      # in your AWS Codebuild project → Build details → Environment →
-      # Additional configuration → Environment variables
-      - npm run e2e:ci
-      
+      - $(npm bin)/cypress run --record --key d18e6be6-b228-47d3-a221-5c3a175d1248
