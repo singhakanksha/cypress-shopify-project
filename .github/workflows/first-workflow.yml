@@ -8,3 +8,7 @@ jobs:
         run: echo "Hello World"
       - name: Print goodbye
         run: echo "good bye"
+      - name: Print numltiple
+        run: |
+            echo "I am first"
+            echo "I am second"
